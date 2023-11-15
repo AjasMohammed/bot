@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock style %}
+{% block body %}
+
+<main>
+    <div class="container">
+        <h1>Welcome to Sales Bot</h1>
+        <form class="intro-form" action="chat/">
+            <label id="name-label" for="username">User Name</label>
+            <input type="text" name="username" id="username" value="Name">
+            <button type="submit" id='name-btn'>Chat</button>
+        </form>
+    </div>
+</main>
+
+{% endblock body %}
+

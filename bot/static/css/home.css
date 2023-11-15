@@ -1,0 +1,36 @@
+*{
+    font-family: "Courier New", Courier, monospace !important;
+  }
+main{
+    margin: auto;
+}
+.container{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.intro-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+#name-label{
+    align-self: first baseline;
+    font-weight: 600;
+}
+#username{
+    height: 20px;
+    border-radius: 7px;
+    padding: 5px;
+    outline: 0;
+}
+#name-btn{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: cadetblue;
+    border: 0;
+}

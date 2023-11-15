@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% load static %} 
+{% block title %}Chat{% endblock title %} {% block style %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+{% endblock style %} {% block body %}
+
+<main>
+  <div class="chat-area">
+    <div class="chat-container">
+        <!-- Messages -->
+    </div>
+    <div class="input-area">
+      <form action="" id="message-form">
+        <input type="text" placeholder="message" id="user-inp" />
+        <button type="submit" id="submit-btn">Send</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock body %} {% block script %}
+
+<script>
+  document.getElementById("message-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const inpField = document.getElementById("user-inp")
+    var userMessage = inpField.value;
+    if (userMessage == ''){
+        return
+    }
+
+    var chatContainer = document.querySelector(".chat-container");
+    chatContainer.innerHTML += `<div class='user-chat msg'>${userMessage}</div>`;
+
+    const url = window.location.href;
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+      },
+    });
+    var data = JSON.stringify({
+      message: userMessage
+    })
+    $.post(url, {'data': data}, 'json').done(response => {
+    setTimeout(() => chatContainer.innerHTML += `<div class='bot-chat msg'>${response.response}</div>`, 200)
+    }).then(()=>    chatContainer.scrollTop = chatContainer.scrollHeight);
+    inpField.value = ''
+  });
+</script>
+
+{% endblock script %}
